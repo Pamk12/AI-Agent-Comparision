@@ -1,0 +1,25 @@
+[tool.pyright]
+extraPaths = ["backend"]
+ignore = ["C:/__pyrefly_virtual__/**", "**/__pyrefly_virtual__/**"]
+
+[tool.pyrefly]
+# Tell Pyrefly to resolve `app.*` modules from the backend directory
+search_path = ["backend"]
+# Use the system Python where all packages are actually installed
+python_interpreter = "C:/Users/KIIT/AppData/Local/Programs/Python/Python312/python.exe"
+# Suppress diagnostics from virtual in-memory buffers created by the IDE extension
+ignore = ["**/__pyrefly_virtual__/**", "**/inmemory/**"]
+
+
+
+[project]
+name = "ai-agent"
+version = "0.1.0"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "python-dotenv",
+    "google-generativeai",
+    "httpx"
+]

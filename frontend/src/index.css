@@ -1,0 +1,15 @@
+/* Global resets to ensure layout stretches correctly */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0a0b0d;
+}

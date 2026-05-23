@@ -1,0 +1,14 @@
+[defaults]
+# Configure module resolution for backend
+search_path = [
+    "backend",
+    "."
+]
+
+# Tell Pyrefly to ignore its own virtual in-memory scratch buffers
+# This will remove the 70+ "ghost" errors from the IDE Problems tab.
+ignore = [
+    "**/__pyrefly_virtual__/**",
+    "**/__pyrefly_virtual__/inmemory/**",
+    "__pyrefly_virtual__"
+]
