@@ -90,7 +90,7 @@ class LLMClient:
         # 1. Route to Hugging Face Space if deployed
         if hf_space_url:
             try:
-                with httpx.Client(timeout=120.0) as client:
+                with httpx.Client(timeout=300.0) as client:
                     response = client.post(
                         f"{hf_space_url.rstrip('/')}/api/chat",
                         json={"messages": local_messages}
