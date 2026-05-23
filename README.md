@@ -8,13 +8,20 @@ A full-stack, dual-agent platform designed to pit blazing-fast Frontier Models (
 
 ---
 
+### 📊 Automated Evaluation Dashboard
+![Automated Evaluation Dashboard](evals.png)
+
+👉 [**Download the Full PDF Evaluation Report**](evaluation_report.pdf)
+
+---
+
 ## 🏗️ Architecture Decisions
 We built this platform to be modular, fast, and completely stateless.
 
 * **Dual-Environment Routing:** Using `VITE_API_BASE_URL`, the exact same codebase works on `localhost` and dynamically adapts when pushed to Vercel and Render. Zero configuration changes required.
 * **Abstracted LLM Client:** The React frontend never knows where the AI lives. Our FastAPI backend intercepts requests and uses a Strategy Pattern to route them to either Groq Cloud or the Hugging Face Space.
 * **Containerized OSS Model:** Instead of burning up local CPU cores, we wrapped the Open Source Qwen model into a FastAPI Docker container and deployed it publicly to Hugging Face Spaces.
-* **Heuristic Evaluation Engine:** Rather than paying an LLM to evaluate another LLM, we built a 100% deterministic, rule-based NLP evaluator for our automated test suite.
+* **Heuristic Evaluation Engine (`run_evals.py`):** Rather than paying an LLM to evaluate another LLM, we built a 100% deterministic, rule-based heuristic evaluator for our automated test suite. **All 15 evaluation prompts and the scoring logic are centrally located inside `run_evals.py`.** This ensures zero evaluation cost and absolute predictability when grading factual accuracy, safety guardrails, and bias.
 
 ---
 
@@ -22,7 +29,7 @@ We built this platform to be modular, fast, and completely stateless.
 Engineering is about compromises. Here is what we prioritized:
 
 * **Hugging Face Space vs. Local CPU:** Initially, the OSS model ran directly on the user's local machine. We traded this extreme offline privacy for a cloud-hosted Hugging Face endpoint to massively improve response times and prevent device freezing.
-* **Heuristic Judge vs. LLM-as-a-Judge:** We chose a regex/keyword-based evaluation judge over an AI judge (like GPT-4). This gave us zero latency and zero cost, but we sacrificed the nuance required to detect extremely subtle hallucinations.
+* **Heuristic Judge vs. LLM-as-a-Judge:** We chose a regex/keyword-based heuristic judge over an AI judge (like GPT-4). This gave us zero latency and zero cost, but we sacrificed the deep nuance required to detect extremely subtle hallucinations that only a larger model could catch.
 * **In-Memory State vs. Managed DB:** We chose lightweight, in-memory session tracking instead of PostgreSQL. This makes the repository incredibly easy for developers to clone and run (zero config), but means chat histories reset when the cloud server sleeps.
 
 ---
@@ -81,3 +88,8 @@ npm install
 npm run dev
 ```
 Navigate to `http://localhost:5173` in your browser!
+
+---
+
+### 👤 Authorship Note
+*Note: `pritamcandiclie-glitch` is a secondary account of mine. It has no actual contribution to this project. All commits, architecture, and core development were performed entirely by me (Pamk12).*
