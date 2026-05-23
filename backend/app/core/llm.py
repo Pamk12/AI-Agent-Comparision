@@ -100,9 +100,9 @@ class LLMClient:
                     
                 return data["reply"], data["input_tokens"], data["output_tokens"], data.get("cost", 0.0), data["latency_ms"] / 1000.0
             except Exception as e:
-                print(f"Failed to route to HF Space: {e}. Falling back to local pipeline...")
+                raise LLMException(f"Failed to route to HF Space: {e}")
 
-        # 2. Fallback to Local Offline inference
+        # 2. Fallback to Local Offline inference (Only if HF_SPACE_URL is not set)
         try:
             if _local_pipe is None:
                 os.environ["HF_HUB_OFFLINE"] = "1"
