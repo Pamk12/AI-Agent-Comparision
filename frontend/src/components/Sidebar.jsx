@@ -72,15 +72,22 @@ export default function Sidebar({
               <label style={{ fontSize: "0.75rem" }}>Model Name</label>
               <input
                 type="text"
+                disabled
                 className="form-input"
                 value={modelName}
-                onChange={(e) => setModelName(e.target.value)}
-                style={{ padding: "6px", fontSize: "0.8rem" }}
+                style={{ 
+                  background: "rgba(255, 255, 255, 0.05)", 
+                  borderColor: "rgba(255, 255, 255, 0.1)",
+                  color: "var(--text-secondary)",
+                  cursor: "not-allowed",
+                  padding: "6px", 
+                  fontSize: "0.8rem"
+                }} 
               />
             </div>
           )}
 
-          {!isLocalhost && (
+          {!isLocalhost && provider !== "local" && (
             <div className="form-group" style={{ marginBottom: "8px" }}>
               <label style={{ fontSize: "0.75rem" }}>API Key</label>
               <input
