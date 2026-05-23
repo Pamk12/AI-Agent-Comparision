@@ -9,7 +9,8 @@ A full-stack, dual-agent platform designed to pit blazing-fast Frontier Models (
 ---
 
 ### 📊 Automated Evaluation Dashboard
-![Automated Evaluation Dashboard](evals.png)
+<img width="300" height="200" alt="image" src="https://github.com/user-attachments/assets/a989f5ef-15d5-4bff-9491-379b0c6f680f" />
+
 
 👉 [**Download the Full PDF Evaluation Report**](evaluation_report.pdf)
 
