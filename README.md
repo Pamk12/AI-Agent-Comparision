@@ -1,4 +1,6 @@
 # 🚀 AI Assistant Comparison Hub
+### 👤 Authorship Note
+*Note: `pritamcandiclie-glitch` is a secondary account of mine. It has no actual contribution to this project. All commits, architecture, and core development were performed entirely by me (Pamk12).*
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Deploy_on_Vercel-black?style=for-the-badge&logo=vercel)](https://ai-agent-comparision.vercel.app/)
 
@@ -92,5 +94,4 @@ Navigate to `http://localhost:5173` in your browser!
 
 ---
 
-### 👤 Authorship Note
-*Note: `pritamcandiclie-glitch` is a secondary account of mine. It has no actual contribution to this project. All commits, architecture, and core development were performed entirely by me (Pamk12).*
+
