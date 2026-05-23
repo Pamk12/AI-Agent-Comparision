@@ -78,8 +78,31 @@ class LLMClient:
         messages: List[Message]
     ) -> Tuple[str, int, int, float, float]:
         global _local_pipe
-        start_time = time.time()
         
+        # Format messages
+        local_messages = [{"role": "system", "content": system_prompt}]
+        for msg in messages:
+            local_messages.append({"role": msg.role, "content": msg.content})
+
+        start_time = time.time()
+        hf_space_url = os.getenv("HF_SPACE_URL")
+
+        # 1. Route to Hugging Face Space if deployed
+        if hf_space_url:
+            try:
+                with httpx.Client(timeout=120.0) as client:
+                    response = client.post(
+                        f"{hf_space_url.rstrip('/')}/api/chat",
+                        json={"messages": local_messages}
+                    )
+                    response.raise_for_status()
+                    data = response.json()
+                    
+                return data["reply"], data["input_tokens"], data["output_tokens"], data.get("cost", 0.0), data["latency_ms"] / 1000.0
+            except Exception as e:
+                print(f"Failed to route to HF Space: {e}. Falling back to local pipeline...")
+
+        # 2. Fallback to Local Offline inference
         try:
             if _local_pipe is None:
                 os.environ["HF_HUB_OFFLINE"] = "1"
